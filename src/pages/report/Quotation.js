@@ -177,13 +177,13 @@ function Quotation() {
                                     )
                                 )}
                             </tbody >
-                            <tfoot className="border border-slate-300 bg-slate-100">
+                            {/* <tfoot className="border border-slate-300 bg-slate-100">
                                 <tr>
                                     <td className="border px-2 border-slate-300 text-right font-bold"></td>
                                     <td className="border px-2 border-slate-300 text-right font-bold" colSpan={7}>Sub Total</td>
                                     <td className="border px-2 border-slate-300 text-right font-bold">{formatCurrency(sumData.subTotal)}</td>
                                 </tr>
-                            </tfoot>
+                            </tfoot> */}
                         </table >
                     </div >
                     <div className="mt-10 overflow-x-auto print:overflow-x-hidden">
@@ -218,7 +218,7 @@ function Quotation() {
                                     </tr>
                                     <tr>
                                         <th className="border px-2 border-slate-300 text-right" colSpan={3}>Discount</th>
-                                        <th className="border px-2 border-slate-300 text-right">{objParam.data_draf?.discon?.value}%</th>
+                                        <th className="border px-2 border-slate-300 text-right">{objParam.data_draf?.discon?.value ? (objParam.data_draf?.discon?.value + `%`) : '-'}</th>
                                         <th className="border px-2 border-slate-300"></th>
                                     </tr>
                                     <tr>
