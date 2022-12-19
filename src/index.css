@@ -23,8 +23,17 @@
 
 @media print {
   @page {
-    size: auto;
+    size: A4;
     margin-top: 10mm;
     margin-bottom: 10mm;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact;
+    zoom: 80%;
+  }
+
+  .print-break {
+    page-break-inside: avoid;
   }
 }

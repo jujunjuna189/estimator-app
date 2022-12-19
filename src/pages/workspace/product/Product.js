@@ -392,7 +392,7 @@ function Product() {
                         )}
                     </div>
                     <div className="mt-6">
-                        <FieldNumber value={isNaN(productDraf?.discon?.value) ? '' : productDraf?.discon?.value} label="Discount max:15%" handleChange={(event) => onChangeDiscon(event.target.value)} />
+                        <FieldNumber value={isNaN(productDraf?.discon?.value) ? '' : productDraf?.discon?.value} label="" handleChange={(event) => onChangeDiscon(event.target.value)} />
                     </div>
                     <div className="border border-dashed border-slate-400 mt-3 flex justify-between p-3 rounded-md font-bold mb-3">
                         <span>Grand Total</span>
