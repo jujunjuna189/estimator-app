@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { LGlogo1 } from "../../../assets";
 import { BTDownloadFloatRange, CBProductCard, FieldNumber, FieldText, FieldTextArea, ImageChoose } from "../../../components";
 import CBSmallCard from "../../../components/card-button/CBSmallCard";
+import resApi from "../../../constants/Api";
 import { getProductColor } from "../../../services/product/ProductColorService";
 import { getProductModel } from "../../../services/product/ProductModelService";
 import { getProductPrice } from "../../../services/product/ProductPriceService";
@@ -436,7 +437,7 @@ function Product() {
             <div className="px-3 py-[0.8rem] bg-white flex justify-between items-center">
                 <img src={LGlogo1} className="w-[130px]" alt="Logo Handex" />
                 <div className="flex gap-2">
-                    <BTDownloadFloatRange downloadLink="http://127.0.0.1:8000/api/dashboard/product/workspace/export" />
+                    <BTDownloadFloatRange downloadLink={resApi.productWorkspaceExport} />
                     <span className="border border-slate-500 border-dashed rounded-md px-2 py-2 text-sm text-white font-medium flex items-center gap-1 cursor-pointer" onClick={() => onToQuotation()}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-file-report" width="16" height="16" viewBox="0 0 24 24" strokeWidth="2.5" stroke="#0f172a" fill="none" strokeLinecap="round" strokeLinejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />

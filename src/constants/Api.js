@@ -24,6 +24,8 @@ const resApi = {
     productPriceShow: api + 'dashboard/product/price',
     // Product Workspace
     productWorkspaceStore: api + 'dashboard/product/workspace/store',
+    // Export Workspace
+    productWorkspaceExport: api + 'dashboard/product/workspace/export',
 }
 
 export default resApi;
