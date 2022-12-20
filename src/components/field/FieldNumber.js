@@ -5,8 +5,8 @@ function FieldNumber(props) {
             return (
                 <small className="absolute -top-10 left-0 bg-white border rounded-md p-1 font-medium transition ease-in-out delay-150 text-slate-900 animate-bounce shadow-sm">
                     {props.maxLabel}
-                    <div class="w-4 overflow-hidden inline-block absolute -bottom-[12px] left-2">
-                        <div class=" h-3 w-3 bg-white border -rotate-45 transform origin-top-left"></div>
+                    <div className="w-4 overflow-hidden inline-block absolute -bottom-[12px] left-2">
+                        <div className=" h-3 w-3 bg-white border -rotate-45 transform origin-top-left"></div>
                     </div>
                 </small>
             );

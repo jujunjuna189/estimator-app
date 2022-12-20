@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LGlogo1 } from "../../../assets";
-import { CBProductCard, FieldNumber, FieldText, FieldTextArea, ImageChoose } from "../../../components";
+import { BTDownloadFloatRange, CBProductCard, FieldNumber, FieldText, FieldTextArea, ImageChoose } from "../../../components";
 import CBSmallCard from "../../../components/card-button/CBSmallCard";
 import { getProductColor } from "../../../services/product/ProductColorService";
 import { getProductModel } from "../../../services/product/ProductModelService";
@@ -271,10 +271,6 @@ function Product() {
         return dataBatch;
     }
 
-    const onFinalSaveDB = () => {
-        console.log(setDataBatch());
-    }
-
     const onToQuotation = () => {
         storeProductWorkspace({
             databatch: JSON.stringify(setDataBatch()),
@@ -440,14 +436,7 @@ function Product() {
             <div className="px-3 py-[0.8rem] bg-white flex justify-between items-center">
                 <img src={LGlogo1} className="w-[130px]" alt="Logo Handex" />
                 <div className="flex gap-2">
-                    <span className="bg-slate-900 rounded-md px-2 py-2 text-sm text-white font-medium flex items-center gap-1 cursor-pointer" onClick={() => onFinalSaveDB()} >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-device-floppy" width="16" height="16" viewBox="0 0 24 24" strokeWidth="2.5" stroke="#ffffff" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2" />
-                            <circle cx="12" cy="14" r="2" />
-                            <polyline points="14 4 14 8 8 8 8 4" />
-                        </svg>
-                    </span>
+                    <BTDownloadFloatRange downloadLink="http://127.0.0.1:8000/api/dashboard/product/workspace/export" />
                     <span className="border border-slate-500 border-dashed rounded-md px-2 py-2 text-sm text-white font-medium flex items-center gap-1 cursor-pointer" onClick={() => onToQuotation()}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-file-report" width="16" height="16" viewBox="0 0 24 24" strokeWidth="2.5" stroke="#0f172a" fill="none" strokeLinecap="round" strokeLinejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
