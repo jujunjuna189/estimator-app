@@ -10,7 +10,7 @@ function CBSmallCard(props) {
     }
 
     return (
-        <div className="border inline-block bg-white px-3 m-2 py-3 rounded-md hover:shadow-md text-center" onClick={props.handleClick}>
+        <div className={`border inline-block ${props.isActive ? `bg-blue-200` : `bg-white`} px-3 m-2 py-3 rounded-md hover:shadow-md text-center`} onClick={props.handleClick}>
             <div className="flex justify-center">
                 {renderIcons()}
             </div>

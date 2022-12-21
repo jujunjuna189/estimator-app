@@ -16,6 +16,13 @@ function Quotation() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const defaultData = () => {
+        sumData.vertical = 0;
+        sumData.horizontal = 0
+        sumData.subTotal = 0
+        sumData.total = 0;
+    }
+
     const countSum = () => {
         defaultData();
         objParam?.data_product.forEach((val, index) => {
@@ -58,18 +65,22 @@ function Quotation() {
         return result;
     }
 
-    const defaultData = () => {
-        sumData.vertical = 0;
-        sumData.horizontal = 0
-        sumData.subTotal = 0
-        sumData.total = 0;
+    const numberOffer = () => {
+        return objParam?.data_report?.number + '/HDX/QTT/' + formatRomawiMonth(new Date().getMonth()) + '/' + formatDateNow().substring(formatDateNow().length, (formatDateNow.length + (formatDateNow().length - 2)))
+    }
+
+    const onPrint = () => {
+        let curUrl = window.location.href;
+        window.history.replaceState(window.history.state, '', curUrl + '/' + numberOffer());
+        window.print();
+        window.history.replaceState(window.history.state, '', curUrl);
     }
 
     return (
         <>
             <div className="flex justify-center relative bg-slate-100 print:bg-white pb-4">
                 <div className="print:hidden mt-7 container flex justify-end pr-10 bg-white shadow-md rounded-lg py-2 ">
-                    <span className="bg-slate-900 text-white rounded-md px-3 py-2 cursor-pointer" onClick={() => window.print()}>Print</span>
+                    <span className="bg-slate-900 text-white rounded-md px-3 py-2 cursor-pointer" onClick={() => onPrint()}>Print</span>
                 </div>
             </div>
             <div className="flex justify-center py-10 print:mx-[1rem]">
@@ -86,7 +97,7 @@ function Quotation() {
                                 <tbody>
                                     <tr>
                                         <td className="text-sm"><span className="font-bold">NO. PENAWARAN</span></td>
-                                        <td className="text-sm"> : {objParam?.data_report?.number}/HDX/QTT/{formatRomawiMonth(new Date().getMonth())}/{formatDateNow().substring(formatDateNow().length, (formatDateNow.length + (formatDateNow().length - 2)))}</td>
+                                        <td className="text-sm"> : {numberOffer()}</td>
                                     </tr>
                                     <tr>
                                         <td className="text-sm"><span className="font-bold">TANGGAL</span></td>

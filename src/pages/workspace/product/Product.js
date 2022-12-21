@@ -117,26 +117,39 @@ function Product() {
         setDraf('model_product_setting', 0);
     }
 
-    const onClickProduct = (product_id) => {
-        let productData = product.filter((product) => product.id === product_id);
-        productDraf['product'] = productData[0];
-        setProductDraf({ ...productDraf });
-        getSeries(product_id);
-        getModel(product_id);
+    const setIsActiveData = (index, array) => {
+        let data = [];
+        array.forEach((val, index_val) => {
+            data.push({ ...val, isActive: index === index_val ? true : false });
+        });
+        return data;
     }
 
-    const onClickSeries = ({ id, product_id, name }) => {
+    const onClickProduct = (index, { id }) => {
+        let productData = product[index];
+        productDraf['product'] = productData;
+        setProductDraf({ ...productDraf });
+        getSeries(id);
+        getModel(id);
+        setProduct(setIsActiveData(index, product));
+    }
+
+    const onClickSeries = (index, { id, product_id, name }) => {
         productDraf.model_product.value.map((val, index) => productDraf.model_product.value[index].type = undefined);
         getType(product_id, id);
         setDraf('product_series', {
             id: id,
             name: name
         });
+        productAttribute.series.data = setIsActiveData(index, productAttribute.series.data);
+        setProductAttribute({ ...productAttribute });
     }
 
-    const onCLickModel = (ttlModel = 0, val) => {
-        setProductModel(ttlModel);
+    const onCLickModel = (index = 0, val) => {
+        setProductModel(index);
         setDraf('product_model', val);
+        productAttribute.model.data = setIsActiveData(index, productAttribute.model.data);
+        setProductAttribute({ ...productAttribute });
     }
 
     const onClickProductModel = (index) => {
@@ -146,7 +159,7 @@ function Product() {
         setDraf('model_product_setting', index);
     }
 
-    const onClickType = ({ id, name }) => {
+    const onClickType = (index, { id, name }) => {
         productDraf.model_product.value[productDraf.model_product_setting.value].type = {
             id: id,
             name: name,
@@ -154,9 +167,11 @@ function Product() {
         setProductDraf({
             ...productDraf
         });
+        productAttribute.type.data = setIsActiveData(index, productAttribute.type.data);
+        setProductAttribute({ ...productAttribute });
     }
 
-    const onClickThickness = ({ id, name }) => {
+    const onClickThickness = (index, { id, name }) => {
         productDraf.model_product.value[productDraf.model_product_setting.value].thickness = {
             id: id,
             name: name,
@@ -164,9 +179,11 @@ function Product() {
         setProductDraf({
             ...productDraf
         });
+        productAttribute.thickness.data = setIsActiveData(index, productAttribute.thickness.data);
+        setProductAttribute({ ...productAttribute });
     }
 
-    const onClickColor = ({ id, name }) => {
+    const onClickColor = (index, { id, name }) => {
         productDraf.model_product.value[productDraf.model_product_setting.value].color = {
             id: id,
             name: name,
@@ -174,6 +191,8 @@ function Product() {
         setProductDraf({
             ...productDraf
         });
+        productAttribute.color.data = setIsActiveData(index, productAttribute.color.data);
+        setProductAttribute({ ...productAttribute });
     }
 
     const onChangeRangeProduct = (index, event, keyRange) => {
@@ -295,12 +314,12 @@ function Product() {
         }
     }
 
-    const todoProduct = product.map((val, index) => <CBProductCard key={index} title={val.name} handleClick={() => onClickProduct(val.id)} />);
-    const todoProductModel = productAttribute.model?.data.map((val, index) => <CBSmallCard key={index} title={val.name} ttlIcons={index} handleClick={() => onCLickModel(index, val)} />);
-    const todoProductSeries = productAttribute.series?.data.map((val, index) => <CBProductCard key={index} title={val.name} handleClick={() => onClickSeries(val)} />);
-    const todoProductType = productAttribute.type?.data.map((val, index) => <CBProductCard key={index} title={val.name} handleClick={() => onClickType(val)} />);
-    const todoProductThickness = productAttribute.thickness?.data.map((val, index) => <CBProductCard key={index} title={val.name} handleClick={() => onClickThickness(val)} />);
-    const todoProductColor = productAttribute.color?.data.map((val, index) => <CBProductCard key={index} title={val.name} handleClick={() => onClickColor(val)} />);
+    const todoProduct = product.map((val, index) => <CBProductCard key={index} title={val.name} isActive={val.isActive} handleClick={() => onClickProduct(index, val)} />);
+    const todoProductModel = productAttribute.model?.data.map((val, index) => <CBSmallCard key={index} title={val.name} isActive={val.isActive} ttlIcons={index} handleClick={() => onCLickModel(index, val)} />);
+    const todoProductSeries = productAttribute.series?.data.map((val, index) => <CBProductCard key={index} title={val.name} isActive={val.isActive} handleClick={() => onClickSeries(index, val)} />);
+    const todoProductType = productAttribute.type?.data.map((val, index) => <CBProductCard key={index} title={val.name} isActive={val.isActive} handleClick={() => onClickType(index, val)} />);
+    const todoProductThickness = productAttribute.thickness?.data.map((val, index) => <CBProductCard key={index} title={val.name} isActive={val.isActive} handleClick={() => onClickThickness(index, val)} />);
+    const todoProductColor = productAttribute.color?.data.map((val, index) => <CBProductCard key={index} title={val.name} isActive={val.isActive} handleClick={() => onClickColor(index, val)} />);
 
     const previewSettingTab = () => {
         return (
@@ -450,7 +469,7 @@ function Product() {
                 </div>
             </div>
             <div className="md:flex md:fixed md:w-screen md:bottom-0 md:top-16 ">
-                <div className="w-[17rem] border-dashed rounded-r-lg px-3 pt-2 overflow-y-auto">
+                <div className="w-full border-dashed rounded-r-lg px-3 pt-2 overflow-y-auto md:w-[17rem]">
                     <div>
                         <small className="font-bold mb-4">General Type</small>
                         <div className="max-h-[15rem] overflow-y-auto mt-1">
